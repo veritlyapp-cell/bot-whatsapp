@@ -1,0 +1,121 @@
+[
+    {
+        "tenant_id": "ngr_papajohns",
+        "nombre": "Papa Johns Peru",
+        "marca": "Papa Johns",
+        "logo": "https://www.papajohns.com.pe/static/images/logo.png",
+        "colores": {
+            "primary": "#00A24D",
+            "secondary": "#E31837",
+            "accent": "#FFD100"
+        },
+        "contacto": {
+            "email": "rrhh@papajohns.pe",
+            "telefono": "987111000"
+        },
+        "webhook_origin": "whatsapp_papajohns",
+        "activo": true
+    },
+    {
+        "tenant_id": "ngr_bembos",
+        "nombre": "Bembos",
+        "marca": "Bembos",
+        "logo": "https://www.bembos.com.pe/static/images/logo.png",
+        "colores": {
+            "primary": "#ED1C24",
+            "secondary": "#FDB913",
+            "accent": "#000000"
+        },
+        "contacto": {
+            "email": "rrhh@bembos.pe",
+            "telefono": "987222000"
+        },
+        "webhook_origin": "whatsapp_bembos",
+        "activo": true
+    },
+    {
+        "tenant_id": "ngr_dunkin",
+        "nombre": "Dunkin Peru",
+        "marca": "Dunkin",
+        "logo": "https://www.dunkin.pe/static/images/logo.png",
+        "colores": {
+            "primary": "#FF6600",
+            "secondary": "#DD0274",
+            "accent": "#FFFFFF"
+        },
+        "contacto": {
+            "email": "rrhh@dunkin.pe",
+            "telefono": "987333000"
+        },
+        "webhook_origin": "whatsapp_dunkin",
+        "activo": true
+    },
+    {
+        "tenant_id": "ngr_popeyes",
+        "nombre": "Popeyes Peru",
+        "marca": "Popeyes",
+        "logo": "https://www.popeyes.com.pe/static/images/logo.png",
+        "colores": {
+            "primary": "#FF7A00",
+            "secondary": "#2C1E14",
+            "accent": "#E31837"
+        },
+        "contacto": {
+            "email": "rrhh@popeyes.pe",
+            "telefono": "987444000"
+        },
+        "webhook_origin": "whatsapp_popeyes",
+        "activo": true
+    },
+    {
+        "tenant_id": "ngr_donbelisario",
+        "nombre": "Don Belisario",
+        "marca": "Don Belisario",
+        "logo": "https://www.donbelisario.pe/static/images/logo.png",
+        "colores": {
+            "primary": "#8B4513",
+            "secondary": "#FFD700",
+            "accent": "#228B22"
+        },
+        "contacto": {
+            "email": "rrhh@donbelisario.pe",
+            "telefono": "987555000"
+        },
+        "webhook_origin": "whatsapp_donbelisario",
+        "activo": true
+    },
+    {
+        "tenant_id": "ngr_chinawok",
+        "nombre": "Chinawok",
+        "marca": "Chinawok",
+        "logo": "https://www.chinawok.pe/static/images/logo.png",
+        "colores": {
+            "primary": "#C41E3A",
+            "secondary": "#FFD700",
+            "accent": "#000000"
+        },
+        "contacto": {
+            "email": "rrhh@chinawok.pe",
+            "telefono": "987666000"
+        },
+        "webhook_origin": "whatsapp_chinawok",
+        "activo": true
+    },
+    {
+        "tenant_id": "ngr_sr",
+        "nombre": "SR Restaurantes",
+        "marca": "SR",
+        "logo": "https://www.sr.pe/static/images/logo.png",
+        "colores": {
+            "primary": "#1E90FF",
+            "secondary": "#FF4500",
+            "accent": "#32CD32"
+        },
+        "contacto": {
+            "email": "rrhh@sr.pe",
+            "telefono": "987777000"
+        },
+        "webhook_origin": "whatsapp_sr",
+        "activo": true
+    }
+]

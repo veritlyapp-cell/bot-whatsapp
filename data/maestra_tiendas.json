@@ -1,0 +1,134 @@
+[
+  {
+    "marca": "Papa Johns",
+    "codigo": "PJ001",
+    "nombre": "Papa Johns San Isidro",
+    "direccion": "Av. Camino Real 1050, San Isidro",
+    "distrito": "San Isidro",
+    "zona": "Lima Centro",
+    "gerente": "María González",
+    "email": "gerente.pj001@ngr.pe",
+    "telefono": "987111001"
+  },
+  {
+    "marca": "Papa Johns",
+    "codigo": "PJ002",
+    "nombre": "Papa Johns Miraflores",
+    "direccion": "Av. Larco 1234, Miraflores",
+    "distrito": "Miraflores",
+    "zona": "Lima Centro",
+    "gerente": "Carlos Ruiz",
+    "email": "gerente.pj002@ngr.pe",
+    "telefono": "987111002"
+  },
+  {
+    "marca": "Bembos",
+    "codigo": "BEM001",
+    "nombre": "Bembos Jockey Plaza",
+    "direccion": "Av. Javier Prado Este 4200, Surco",
+    "distrito": "Surco",
+    "zona": "Lima Este",
+    "gerente": "Juan Pérez",
+    "email": "gerente.bem001@ngr.pe",
+    "telefono": "987222001"
+  },
+  {
+    "marca": "Bembos",
+    "codigo": "BEM002",
+    "nombre": "Bembos La Molina",
+    "direccion": "Av. La Molina 1010, La Molina",
+    "distrito": "La Molina",
+    "zona": "Lima Este",
+    "gerente": "Rosa Medina",
+    "email": "gerente.bem002@ngr.pe",
+    "telefono": "987222002"
+  },
+  {
+    "marca": "Dunkin",
+    "codigo": "DUN001",
+    "nombre": "Dunkin San Miguel",
+    "direccion": "Av. La Marina 2000, San Miguel",
+    "distrito": "San Miguel",
+    "zona": "Lima Norte",
+    "gerente": "Luis Torres",
+    "email": "gerente.dun001@ngr.pe",
+    "telefono": "987333001"
+  },
+  {
+    "marca": "Dunkin",
+    "codigo": "DUN002",
+    "nombre": "Dunkin Los Olivos",
+    "direccion": "Av. Alfredo Mendiola 3698, Los Olivos",
+    "distrito": "Los Olivos",
+    "zona": "Lima Norte",
+    "gerente": "Patricia Vega",
+    "email": "gerente.dun002@ngr.pe",
+    "telefono": "987333002"
+  },
+  {
+    "marca": "Popeyes",
+    "codigo": "POP001",
+    "nombre": "Popeyes Surquillo",
+    "direccion": "Av. Angamos Este 2681, Surquillo",
+    "distrito": "Surquillo",
+    "zona": "Lima Sur",
+    "gerente": "Miguel Sánchez",
+    "email": "gerente.pop001@ngr.pe",
+    "telefono": "987444001"
+  },
+  {
+    "marca": "Popeyes",
+    "codigo": "POP002",
+    "nombre": "Popeyes Villa El Salvador",
+    "direccion": "Av. Pachacutec 500, Villa El Salvador",
+    "distrito": "Villa El Salvador",
+    "zona": "Lima Sur",
+    "gerente": "Ana Flores",
+    "email": "gerente.pop002@ngr.pe",
+    "telefono": "987444002"
+  },
+  {
+    "marca": "Don Belisario",
+    "codigo": "DB001",
+    "nombre": "Don Belisario San Borja",
+    "direccion": "Av. Aviación 2405, San Borja",
+    "distrito": "San Borja",
+    "zona": "Lima Centro",
+    "gerente": "Fernando Díaz",
+    "email": "gerente.db001@ngr.pe",
+    "telefono": "987555001"
+  },
+  {
+    "marca": "Chinawok",
+    "codigo": "CW001",
+    "nombre": "Chinawok Lince",
+    "direccion": "Av. Arenales 2020, Lince",
+    "distrito": "Lince",
+    "zona": "Lima Centro",
+    "gerente": "Laura Castro",
+    "email": "gerente.cw001@ngr.pe",
+    "telefono": "987666001"
+  },
+  {
+    "marca": "Chinawok",
+    "codigo": "CW002",
+    "nombre": "Chinawok Ate",
+    "direccion": "Av. Separadora Industrial 1750, Ate",
+    "distrito": "Ate",
+    "zona": "Lima Este",
+    "gerente": "Roberto Núñez",
+    "email": "gerente.cw002@ngr.pe",
+    "telefono": "987666002"
+  },
+  {
+    "marca": "SR",
+    "codigo": "SR001",
+    "nombre": "SR Pueblo Libre",
+    "direccion": "Av. La Marina 1500, Pueblo Libre",
+    "distrito": "Pueblo Libre",
+    "zona": "Lima Centro",
+    "gerente": "Sofía Ramírez",
+    "email": "gerente.sr001@ngr.pe",
+    "telefono": "987777001"
+  }
+]

@@ -1,0 +1,22 @@
+marca,codigo_tienda,puesto,cupos,tipo_turno,fecha_inicio,fecha_fin
+Papa Johns,PJ001,Pizzero,3,rotativos,2025-12-20,2026-01-05
+Papa Johns,PJ001,Cajero,2,cierres,2025-12-20,2026-01-05
+Papa Johns,PJ002,Repartidor,4,rotativos,2025-12-20,2026-01-05
+Papa Johns,PJ002,Pizzero,2,rotativos,2025-12-20,2026-01-05
+Bembos,BEM001,Parrillero,3,rotativos,2025-12-19,2026-01-03
+Bembos,BEM001,Cajero,2,mixto,2025-12-19,2026-01-03
+Bembos,BEM002,Auxiliar de Cocina,4,rotativos,2025-12-19,2026-01-03
+Bembos,BEM002,Mesero,2,cierres,2025-12-19,2026-01-03
+Dunkin,DUN001,Barista,3,rotativos,2025-12-21,2026-01-07
+Dunkin,DUN001,Cajero,2,rotativos,2025-12-21,2026-01-07
+Dunkin,DUN002,Auxiliar de Pastelería,2,rotativos,2025-12-21,2026-01-07
+Popeyes,POP001,Cocinero,3,rotativos,2025-12-20,2026-01-05
+Popeyes,POP001,Cajero,2,cierres,2025-12-20,2026-01-05
+Popeyes,POP002,Auxiliar de Cocina,4,rotativos,2025-12-20,2026-01-05
+Don Belisario,DB001,Parrillero,2,rotativos,2025-12-22,2026-01-08
+Don Belisario,DB001,Mesero,2,mixto,2025-12-22,2026-01-08
+Chinawok,CW001,Cocinero Wok,3,rotativos,2025-12-19,2026-01-04
+Chinawok,CW001,Cajero,2,rotativos,2025-12-19,2026-01-04
+Chinawok,CW002,Auxiliar de Cocina,3,rotativos,2025-12-19,2026-01-04
+SR,SR001,Cocinero,2,rotativos,2025-12-23,2026-01-09
+SR,SR001,Cajero,2,cierres,2025-12-23,2026-01-09
