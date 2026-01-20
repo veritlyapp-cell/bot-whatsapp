@@ -7,7 +7,7 @@
         ]
     },
     "firestore": {
-        "rules": "firestore.rules",
-        "indexes": "firestore.indexes.json"
+        "rules": "lia-frontend/firestore.rules",
+        "indexes": "lia-frontend/firestore.indexes.json"
     }
 }
