@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex Calendario 2026 - Vasco</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .pokedex-red { background-color: #dc0a2d; }
+        .pokedex-dark-red { background-color: #8b0000; }
+        .pokedex-blue-screen { background-color: #51adcb; }
+        
+        /* Estilo para el visor del Pokémon */
+        .pokemon-viewer {
+            background-color: #dedede;
+            border: 4px solid #222;
+            border-radius: 10px 10px 10px 40px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white; padding: 0; }
+            .pokedex-container {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                box-shadow: none;
+                border: 8px solid black;
+            }
+        }
+
+        .birthday-glow {
+            animation: glow 1.5s infinite alternate;
+            border: 2px solid gold !important;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px gold; }
+            to { box-shadow: 0 0 20px gold; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex justify-center items-start min-h-screen">
+
+    <!-- Contenedor Principal Pokédex -->
+    <div id="pokedex" class="pokedex-container w-full max-w-5xl bg-[#dc0a2d] rounded-[2rem] border-8 border-black shadow-2xl overflow-hidden relative">
+        
+        <!-- Cabecera de la Pokédex -->
+        <div class="flex items-center p-6 border-b-4 border-black bg-pokedex-red">
+            <div class="w-16 h-16 bg-white rounded-full border-4 border-black flex items-center justify-center shadow-inner mr-4">
+                <div class="w-12 h-12 bg-blue-400 rounded-full border-4 border-slate-700 animate-pulse"></div>
+            </div>
+            <div class="flex space-x-2">
+                <div class="w-4 h-4 bg-red-700 border-2 border-black rounded-full"></div>
+                <div class="w-4 h-4 bg-yellow-400 border-2 border-black rounded-full"></div>
+                <div class="w-4 h-4 bg-green-500 border-2 border-black rounded-full"></div>
+            </div>
+            <div class="ml-auto flex items-center gap-4">
+                <button onclick="changeMonth(-1)" class="no-print bg-black text-white p-2 rounded-full hover:bg-slate-800 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <h1 id="monthTitle" class="text-white text-2xl md:text-4xl font-black uppercase tracking-tighter">ENERO 2026</h1>
+                <button onclick="changeMonth(1)" class="no-print bg-black text-white p-2 rounded-full hover:bg-slate-800 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row p-4 gap-4">
+            
+            <!-- Lado Izquierdo: Calendario -->
+            <div class="flex-1">
+                <div class="bg-white rounded-xl border-4 border-black p-4 relative overflow-hidden h-full">
+                    <!-- Cuadrícula de Días -->
+                    <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs md:text-base mb-2">
+                        <div class="text-red-600">DOM</div>
+                        <div>LUN</div>
+                        <div>MAR</div>
+                        <div>MIE</div>
+                        <div>JUE</div>
+                        <div>VIE</div>
+                        <div class="text-blue-600">SAB</div>
+                    </div>
+                    
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-1 h-full min-h-[350px]">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lado Derecho: Pokémon y Misiones -->
+            <div class="w-full md:w-72 flex flex-col gap-4">
+                
+                <!-- Visor del Pokémon Protagonista (NUEVA UBICACIÓN) -->
+                <div class="pokemon-viewer overflow-hidden relative">
+                    <img id="mainPokemonImg" src="" alt="Pokemon" class="w-40 h-40 object-contain z-10">
+                    <!-- Decoración de fondo del visor -->
+                    <div class="absolute inset-0 opacity-10 flex items-center justify-center">
+                        <div class="w-32 h-32 border-4 border-black rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Panel de Datos Regionales -->
+                <div class="bg-green-300 border-4 border-black rounded-xl p-3 font-mono text-sm shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]">
+                    <p class="font-bold text-green-900 mb-1">DATA REGIONAL</p>
+                    <p id="pokemonInfo" class="text-green-800">Cargando datos...</p>
+                </div>
+
+                <!-- Misiones Diarias -->
+                <div class="bg-white rounded-xl border-4 border-black flex-1 flex flex-col">
+                    <div class="bg-yellow-400 border-b-4 border-black p-2 font-black text-center text-sm">
+                        MISIONES DE VASCO
+                    </div>
+                    <div class="p-4 flex flex-col gap-3">
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" class="w-6 h-6 border-2 border-black rounded accent-red-500">
+                            <span class="text-sm font-bold group-hover:text-red-600">👕 Vestirme solo</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" class="w-6 h-6 border-2 border-black rounded accent-red-500">
+                            <span class="text-sm font-bold group-hover:text-red-600">🧸 Ordenar juguetes</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer group">
+                            <input type="checkbox" class="w-6 h-6 border-2 border-black rounded accent-red-500">
+                            <span class="text-sm font-bold group-hover:text-red-600">🥦 Comer verduras</span>
+                        </label>
+                    </div>
+                    
+                    <!-- Próximo mes mini (Ahora aquí abajo) -->
+                    <div class="mt-auto bg-slate-800 p-2 text-white">
+                        <div class="text-[9px] uppercase font-bold text-slate-400 mb-1">Próximo Mes:</div>
+                        <div id="nextMonthPreview" class="grid grid-cols-7 gap-px opacity-70">
+                            <!-- Micro grid -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decoración Inferior Pokédex -->
+        <div class="flex justify-between items-center p-4 bg-pokedex-dark-red border-t-4 border-black">
+            <div class="flex gap-2">
+                <div class="w-12 h-2 bg-blue-500 border border-black rounded-full"></div>
+                <div class="w-12 h-2 bg-blue-500 border border-black rounded-full"></div>
+            </div>
+            <div class="text-white text-[10px] font-bold uppercase">Maestro Pokémon: Vasco</div>
+        </div>
+    </div>
+
+    <script>
+        const monthsNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        
+        const pokemonList = [
+            { name: "Pikachu", id: 25, type: "Eléctrico" },
+            { name: "Charmander", id: 4, type: "Fuego" },
+            { name: "Bulbasaur", id: 1, type: "Planta" },
+            { name: "Squirtle", id: 7, type: "Agua" },
+            { name: "Jigglypuff", id: 39, type: "Hada" },
+            { name: "Meowth", id: 52, type: "Normal" },
+            { name: "Rapidash", id: 78, type: "Fuego" }, // Favorito
+            { name: "Snorlax", id: 143, type: "Normal" },
+            { name: "Gengar", id: 94, type: "Fantasma" },
+            { name: "Eevee", id: 133, type: "Normal" },
+            { name: "Mewtwo", id: 150, type: "Psíquico" },
+            { name: "Dragonite", id: 149, type: "Dragón" }
+        ];
+
+        const holidays = {
+            "0-1": "Año Nuevo", "3-2": "Jueves Santo", "3-3": "Viernes Santo",
+            "4-1": "Día Trabajo", "5-7": "Bat. Arica", "5-29": "San Pedro",
+            "6-23": "Día FAP", "6-28": "F. Patrias", "6-29": "F. Patrias",
+            "7-6": "Bat. Junín", "7-30": "Sta. Rosa", "9-8": "C. Angamos",
+            "10-1": "Todos Santos", "11-8": "Concepción", "11-9": "Ayacucho", "11-25": "Navidad"
+        };
+
+        const birthdays = {
+            "0-2": "Abu 🎂", "0-20": "Mamita 🎂", "1-20": "Mimi 🎂",
+            "2-2": "👑 VASCO 👑", "2-19": "Pepe 🎂", "9-8": "Papito 🎂",
+            "9-12": "Babi 🎂", "9-22": "Percy 🎂"
+        };
+
+        let currentMonth = 0;
+
+        function init() {
+            renderCalendar(currentMonth);
+        }
+
+        function changeMonth(step) {
+            currentMonth += step;
+            if (currentMonth < 0) currentMonth = 11;
+            if (currentMonth > 11) currentMonth = 0;
+            renderCalendar(currentMonth);
+        }
+
+        function renderCalendar(monthIdx) {
+            const year = 2026;
+            const grid = document.getElementById('calendarGrid');
+            const title = document.getElementById('monthTitle');
+            const info = document.getElementById('pokemonInfo');
+            const pokeImg = document.getElementById('mainPokemonImg');
+            
+            grid.innerHTML = '';
+            title.innerText = `${monthsNames[monthIdx]} ${year}`;
+            
+            const p = pokemonList[monthIdx];
+            pokeImg.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`;
+            info.innerHTML = `Nº: ${String(p.id).padStart(3, '0')}<br>PKMN: ${p.name.toUpperCase()}<br>TIPO: ${p.type}`;
+
+            const firstDay = new Date(year, monthIdx, 1).getDay();
+            const daysInMonth = new Date(year, monthIdx + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dayEl = document.createElement('div');
+                const key = `${monthIdx}-${d}`;
+                const isHoliday = holidays[key];
+                const isBday = birthdays[key];
+                const isVasco = key === "2-2";
+
+                dayEl.className = `border-2 border-slate-100 p-1 flex flex-col items-center justify-start rounded-lg ${isHoliday ? 'bg-red-50' : ''} ${isVasco ? 'birthday-glow' : ''}`;
+                
+                dayEl.innerHTML = `
+                    <span class="text-sm font-black ${isHoliday ? 'text-red-500' : 'text-slate-800'}">${d}</span>
+                    ${isHoliday ? `<span class="text-[7px] text-red-600 text-center font-bold leading-tight">${isHoliday}</span>` : ''}
+                    ${isBday ? `<span class="text-[8px] text-center font-black text-orange-500">${isBday}</span>` : ''}
+                `;
+                grid.appendChild(dayEl);
+            }
+            renderNextPreview(monthIdx);
+        }
+
+        function renderNextPreview(monthIdx) {
+            const nextIdx = (monthIdx + 1) % 12;
+            const preview = document.getElementById('nextMonthPreview');
+            preview.innerHTML = '';
+            const days = new Date(2026, nextIdx + 1, 0).getDate();
+            for (let d = 1; d <= days; d++) {
+                const dot = document.createElement('div');
+                dot.className = "text-[7px] text-center text-slate-500";
+                dot.innerText = d;
+                preview.appendChild(dot);
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

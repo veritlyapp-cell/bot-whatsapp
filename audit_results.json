@@ -1,0 +1,534 @@
+{
+  "rqs": [
+    {
+      "id": "bYTqYfaV0UHQXxvdxQfk",
+      "rqNumber": "RQ-7ME-00003",
+      "batchId": "batch_1769651495448_30cgyhzu3",
+      "instanceNumber": 2,
+      "jobProfileId": "n9kjBBDQIDG5QrbRkSlN",
+      "puesto": "Servicio",
+      "posicion": "Servicio",
+      "modalidad": "Part Time 19",
+      "turno": "Rotativo",
+      "tiendaId": "VhshdSDHdsa33VIcz71i",
+      "tiendaNombre": "Bembos Jockey Plaza",
+      "marcaId": "7MeW5A85sr9m2yxhedAI",
+      "marcaNombre": "Bembos",
+      "vacantes": 1,
+      "descripcion": "Atienda a los clientes, toma pedidos y tambien apoya con la limpieza del counter.",
+      "requisitos": {
+        "experiencia": {
+          "meses": 0,
+          "requerida": false
+        },
+        "edadMax": 65,
+        "edadMin": 18,
+        "disponibilidad": {
+          "dias": [
+            "lunes",
+            "sábado"
+          ],
+          "horarios": [
+            "mañana",
+            "tarde"
+          ]
+        },
+        "distanciaMax": 10
+      },
+      "motivo": "Reemplazo",
+      "approvalHistory": [],
+      "salario": 1130,
+      "beneficios": [],
+      "alert_unfilled": false,
+      "deletion_requested": false,
+      "deletion_approved": false,
+      "tenantId": "ngr_holding",
+      "creadoPor": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+      "creadorEmail": "tiendajockey@ngr.pe",
+      "createdByRole": "store_manager",
+      "approvalFlow": "standard",
+      "categoria": "operativo",
+      "createdAt": {
+        "_seconds": 1769651495,
+        "_nanoseconds": 448000000
+      },
+      "assignedSupervisor": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+      "assignedSupervisorName": "Roberto Solano",
+      "assignedJefeMarca": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+      "assignedJefeMarcaName": "Juan Perez",
+      "currentApprovalLevel": 3,
+      "approvalStatus": "approved",
+      "approvalChain": [
+        {
+          "status": "approved",
+          "approvedAt": {
+            "_seconds": 1769651500,
+            "_nanoseconds": 119000000
+          },
+          "role": "store_manager",
+          "level": 1,
+          "approvedBy": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+          "approvedByName": "tiendajockey@ngr.pe"
+        },
+        {
+          "role": "supervisor",
+          "approvedByName": "Roberto Solano",
+          "approvedAt": {
+            "_seconds": 1769651607,
+            "_nanoseconds": 745000000
+          },
+          "approvedBy": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+          "level": 2,
+          "status": "approved"
+        },
+        {
+          "status": "approved",
+          "level": 3,
+          "role": "jefe_marca",
+          "approvedBy": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+          "approvedByName": "Juan Perez",
+          "approvedAt": {
+            "_seconds": 1769651658,
+            "_nanoseconds": 438000000
+          }
+        }
+      ],
+      "timeToFill": {
+        "total": 1,
+        "count": 1,
+        "average": 1,
+        "lastHireDate": {
+          "_seconds": 1769660870,
+          "_nanoseconds": 271000000
+        },
+        "hires": [
+          {
+            "candidateId": "V5bOngfpTipre2g1lEDo",
+            "days": 1,
+            "hiredAt": {
+              "_seconds": 1769660870,
+              "_nanoseconds": 271000000
+            }
+          }
+        ]
+      },
+      "updatedAt": {
+        "_seconds": 1769660870,
+        "_nanoseconds": 271000000
+      },
+      "closedBy": "system",
+      "filledAt": {
+        "_seconds": 1769660871,
+        "_nanoseconds": 896000000
+      },
+      "filledCount": 1,
+      "closedAt": {
+        "_seconds": 1769660871,
+        "_nanoseconds": 896000000
+      },
+      "closureReason": "Todas las 1 vacantes han sido cubiertas",
+      "status": "filled"
+    },
+    {
+      "id": "jR0JEGUXMrVEyLn6OUji",
+      "rqNumber": "RQ-7ME-00001",
+      "batchId": "batch_1769564834444_f8iaifejf",
+      "instanceNumber": 1,
+      "jobProfileId": "n9kjBBDQIDG5QrbRkSlN",
+      "puesto": "Servicio",
+      "posicion": "Servicio",
+      "modalidad": "Part Time 23",
+      "turno": "Rotativo",
+      "tiendaId": "VhshdSDHdsa33VIcz71i",
+      "tiendaNombre": "Bembos Jockey Plaza",
+      "marcaId": "7MeW5A85sr9m2yxhedAI",
+      "marcaNombre": "Bembos",
+      "vacantes": 1,
+      "descripcion": "Atienda a los clientes, toma pedidos y tambien apoya con la limpieza del counter.",
+      "requisitos": {
+        "disponibilidad": {
+          "horarios": [
+            "mañana",
+            "tarde"
+          ],
+          "dias": [
+            "lunes",
+            "sábado"
+          ]
+        },
+        "edadMax": 65,
+        "experiencia": {
+          "requerida": false,
+          "meses": 0
+        },
+        "edadMin": 18,
+        "distanciaMax": 10
+      },
+      "motivo": "Reemplazo",
+      "approvalHistory": [],
+      "salario": 1130,
+      "beneficios": [],
+      "alert_unfilled": false,
+      "deletion_requested": false,
+      "deletion_approved": false,
+      "tenantId": "ngr_holding",
+      "creadoPor": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+      "creadorEmail": "tiendajockey@ngr.pe",
+      "createdByRole": "store_manager",
+      "approvalFlow": "standard",
+      "categoria": "operativo",
+      "createdAt": {
+        "_seconds": 1769564834,
+        "_nanoseconds": 444000000
+      },
+      "assignedSupervisor": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+      "assignedSupervisorName": "Roberto Solano",
+      "assignedJefeMarca": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+      "assignedJefeMarcaName": "Juan Perez",
+      "currentApprovalLevel": 3,
+      "approvalStatus": "approved",
+      "approvalChain": [
+        {
+          "approvedBy": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+          "level": 1,
+          "approvedAt": {
+            "_seconds": 1769564840,
+            "_nanoseconds": 554000000
+          },
+          "approvedByName": "tiendajockey@ngr.pe",
+          "role": "store_manager",
+          "status": "approved"
+        },
+        {
+          "approvedBy": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+          "approvedAt": {
+            "_seconds": 1769565039,
+            "_nanoseconds": 586000000
+          },
+          "approvedByName": "Roberto Solano",
+          "role": "supervisor",
+          "status": "approved",
+          "level": 2
+        },
+        {
+          "role": "jefe_marca",
+          "status": "approved",
+          "level": 3,
+          "approvedBy": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+          "approvedByName": "Juan Perez",
+          "approvedAt": {
+            "_seconds": 1769565945,
+            "_nanoseconds": 403000000
+          }
+        }
+      ],
+      "timeToFill": {
+        "total": 1,
+        "count": 1,
+        "average": 1,
+        "lastHireDate": {
+          "_seconds": 1769571992,
+          "_nanoseconds": 132000000
+        },
+        "hires": [
+          {
+            "candidateId": "jZ43W45h2ODKKpOCqhRn",
+            "days": 1,
+            "hiredAt": {
+              "_seconds": 1769571992,
+              "_nanoseconds": 132000000
+            }
+          }
+        ]
+      },
+      "updatedAt": {
+        "_seconds": 1769571992,
+        "_nanoseconds": 132000000
+      },
+      "closedBy": "system",
+      "filledAt": {
+        "_seconds": 1769571993,
+        "_nanoseconds": 457000000
+      },
+      "filledCount": 1,
+      "closedAt": {
+        "_seconds": 1769571993,
+        "_nanoseconds": 457000000
+      },
+      "closureReason": "Todas las 1 vacantes han sido cubiertas",
+      "status": "filled"
+    },
+    {
+      "id": "ktDUvf4vUDuddY6KgVQO",
+      "rqNumber": "RQ-7ME-00002",
+      "batchId": "batch_1769564834444_f8iaifejf",
+      "instanceNumber": 2,
+      "jobProfileId": "n9kjBBDQIDG5QrbRkSlN",
+      "puesto": "Servicio",
+      "posicion": "Servicio",
+      "modalidad": "Part Time 23",
+      "turno": "Rotativo",
+      "tiendaId": "VhshdSDHdsa33VIcz71i",
+      "tiendaNombre": "Bembos Jockey Plaza",
+      "marcaId": "7MeW5A85sr9m2yxhedAI",
+      "marcaNombre": "Bembos",
+      "vacantes": 1,
+      "descripcion": "Atienda a los clientes, toma pedidos y tambien apoya con la limpieza del counter.",
+      "requisitos": {
+        "disponibilidad": {
+          "horarios": [
+            "mañana",
+            "tarde"
+          ],
+          "dias": [
+            "lunes",
+            "sábado"
+          ]
+        },
+        "edadMax": 65,
+        "experiencia": {
+          "requerida": false,
+          "meses": 0
+        },
+        "edadMin": 18,
+        "distanciaMax": 10
+      },
+      "motivo": "Reemplazo",
+      "approvalHistory": [],
+      "salario": 1130,
+      "beneficios": [],
+      "alert_unfilled": false,
+      "deletion_requested": false,
+      "deletion_approved": false,
+      "tenantId": "ngr_holding",
+      "creadoPor": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+      "creadorEmail": "tiendajockey@ngr.pe",
+      "createdByRole": "store_manager",
+      "approvalFlow": "standard",
+      "categoria": "operativo",
+      "createdAt": {
+        "_seconds": 1769564834,
+        "_nanoseconds": 444000000
+      },
+      "assignedSupervisor": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+      "assignedSupervisorName": "Roberto Solano",
+      "assignedJefeMarca": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+      "assignedJefeMarcaName": "Juan Perez",
+      "currentApprovalLevel": 3,
+      "approvalStatus": "approved",
+      "approvalChain": [
+        {
+          "role": "store_manager",
+          "approvedBy": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+          "approvedByName": "tiendajockey@ngr.pe",
+          "approvedAt": {
+            "_seconds": 1769564841,
+            "_nanoseconds": 960000000
+          },
+          "level": 1,
+          "status": "approved"
+        },
+        {
+          "level": 2,
+          "approvedAt": {
+            "_seconds": 1769565040,
+            "_nanoseconds": 190000000
+          },
+          "status": "approved",
+          "role": "supervisor",
+          "approvedBy": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+          "approvedByName": "Roberto Solano"
+        },
+        {
+          "level": 3,
+          "role": "jefe_marca",
+          "status": "approved",
+          "approvedBy": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+          "approvedByName": "Juan Perez",
+          "approvedAt": {
+            "_seconds": 1769565945,
+            "_nanoseconds": 990000000
+          }
+        }
+      ],
+      "timeToFill": {
+        "total": 1,
+        "count": 1,
+        "average": 1,
+        "lastHireDate": {
+          "_seconds": 1769574402,
+          "_nanoseconds": 85000000
+        },
+        "hires": [
+          {
+            "candidateId": "V5bOngfpTipre2g1lEDo",
+            "days": 1,
+            "hiredAt": {
+              "_seconds": 1769574402,
+              "_nanoseconds": 85000000
+            }
+          }
+        ]
+      },
+      "updatedAt": {
+        "_seconds": 1769574402,
+        "_nanoseconds": 85000000
+      },
+      "closedBy": "system",
+      "filledAt": {
+        "_seconds": 1769574403,
+        "_nanoseconds": 788000000
+      },
+      "filledCount": 1,
+      "closedAt": {
+        "_seconds": 1769574403,
+        "_nanoseconds": 788000000
+      },
+      "closureReason": "Todas las 1 vacantes han sido cubiertas",
+      "status": "filled"
+    },
+    {
+      "id": "u1ERUFbabVNEIFhuCzlA",
+      "rqNumber": "RQ-7ME-00002",
+      "batchId": "batch_1769651495448_30cgyhzu3",
+      "instanceNumber": 1,
+      "jobProfileId": "n9kjBBDQIDG5QrbRkSlN",
+      "puesto": "Servicio",
+      "posicion": "Servicio",
+      "modalidad": "Part Time 19",
+      "turno": "Rotativo",
+      "tiendaId": "VhshdSDHdsa33VIcz71i",
+      "tiendaNombre": "Bembos Jockey Plaza",
+      "marcaId": "7MeW5A85sr9m2yxhedAI",
+      "marcaNombre": "Bembos",
+      "vacantes": 1,
+      "descripcion": "Atienda a los clientes, toma pedidos y tambien apoya con la limpieza del counter.",
+      "requisitos": {
+        "experiencia": {
+          "meses": 0,
+          "requerida": false
+        },
+        "edadMax": 65,
+        "edadMin": 18,
+        "disponibilidad": {
+          "dias": [
+            "lunes",
+            "sábado"
+          ],
+          "horarios": [
+            "mañana",
+            "tarde"
+          ]
+        },
+        "distanciaMax": 10
+      },
+      "motivo": "Reemplazo",
+      "status": "active",
+      "filledCount": 0,
+      "approvalHistory": [],
+      "salario": 1130,
+      "beneficios": [],
+      "alert_unfilled": false,
+      "deletion_requested": false,
+      "deletion_approved": false,
+      "tenantId": "ngr_holding",
+      "creadoPor": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+      "creadorEmail": "tiendajockey@ngr.pe",
+      "createdByRole": "store_manager",
+      "approvalFlow": "standard",
+      "categoria": "operativo",
+      "createdAt": {
+        "_seconds": 1769651495,
+        "_nanoseconds": 448000000
+      },
+      "updatedAt": {
+        "_seconds": 1769651495,
+        "_nanoseconds": 448000000
+      },
+      "assignedSupervisor": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+      "assignedSupervisorName": "Roberto Solano",
+      "assignedJefeMarca": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+      "assignedJefeMarcaName": "Juan Perez",
+      "currentApprovalLevel": 3,
+      "approvalStatus": "approved",
+      "approvalChain": [
+        {
+          "approvedByName": "tiendajockey@ngr.pe",
+          "level": 1,
+          "approvedBy": "w0mhIEbortO8PdbmBeNAJyOYwb63",
+          "approvedAt": {
+            "_seconds": 1769651498,
+            "_nanoseconds": 972000000
+          },
+          "status": "approved",
+          "role": "store_manager"
+        },
+        {
+          "level": 2,
+          "role": "supervisor",
+          "status": "approved",
+          "approvedAt": {
+            "_seconds": 1769651608,
+            "_nanoseconds": 212000000
+          },
+          "approvedBy": "On6oTNlcxWTZrITYD9qgDDzIJV72",
+          "approvedByName": "Roberto Solano"
+        },
+        {
+          "status": "approved",
+          "role": "jefe_marca",
+          "level": 3,
+          "approvedBy": "sO8MfgznEvPpvIHi7afHiUkFVag1",
+          "approvedByName": "Juan Perez",
+          "approvedAt": {
+            "_seconds": 1769651658,
+            "_nanoseconds": 951000000
+          }
+        }
+      ]
+    }
+  ],
+  "talent_jobs": [],
+  "marcas": [
+    {
+      "id": "7MeW5A85sr9m2yxhedAI",
+      "nombre": "Bembos",
+      "logo": "BB",
+      "logoUrl": "https://firebasestorage.googleapis.com/v0/b/botwhatsapp-5dac9.firebasestorage.app/o/logos%2Fmarcas%2Fnew_ky9txa_1767476998483.jpg?alt=media&token=09bc5ea5-ef9f-4e3b-9b4a-a1b2d85d62e1",
+      "holdingId": "ngr",
+      "activa": true,
+      "candidatos": 0,
+      "entrevistas": 0,
+      "rqs": 0,
+      "createdAt": {
+        "_seconds": 1767477003,
+        "_nanoseconds": 405000000
+      },
+      "updatedAt": {
+        "_seconds": 1767477003,
+        "_nanoseconds": 405000000
+      },
+      "tiendasActivas": 2
+    },
+    {
+      "id": "eZ6WZGL6rYSX63JlyH5X",
+      "nombre": "Dunkin",
+      "logo": "DD",
+      "logoUrl": "https://firebasestorage.googleapis.com/v0/b/botwhatsapp-5dac9.firebasestorage.app/o/logos%2Fmarcas%2Fnew_3dbaes_1767484992963.png?alt=media&token=9a24b291-3ad9-48e9-946d-55538750136d",
+      "holdingId": "ngr",
+      "activa": true,
+      "candidatos": 0,
+      "entrevistas": 0,
+      "rqs": 0,
+      "createdAt": {
+        "_seconds": 1767484997,
+        "_nanoseconds": 812000000
+      },
+      "updatedAt": {
+        "_seconds": 1767484997,
+        "_nanoseconds": 812000000
+      },
+      "tiendasActivas": 1
+    }
+  ]
+}
