@@ -367,8 +367,11 @@ ACCIÓN: Despedida amable. "Gracias por tu interés en NGR. Lamentablemente no c
 
         // Load time slots for ENTREVISTA state
         if (state === CONVERSATION_STATES.ENTREVISTA) {
-            const slots = await Scheduler.generateTimeSlots(new Date(), 7);
+            const storeId = candidateData.selectedStoreId;
+            const slots = await Scheduler.generateTimeSlots(storeId, new Date(), 7);
             context.timeSlots = slots.slice(0, 5).map(s => s.display);
+            // Save slots in context so we can resolve the selection later if needed
+            context.rawSlots = slots.slice(0, 5);
         }
 
         return context;
@@ -594,7 +597,27 @@ ACCIÓN: Despedida amable. "Gracias por tu interés en NGR. Lamentablemente no c
             case CONVERSATION_STATES.TIENDAS:
                 // User selected a store
                 if (candidateData.storeSelection) {
-                    newState = CONVERSATION_STATES.SELECCION_VACANTE;
+                    // Resolve store index to ID
+                    const stores = await StoreMatcher.findMatchingStores({
+                        distrito: candidateData.distrito,
+                        disponibilidad: 'mixto',
+                        tenant_id: tenant_id
+                    });
+                    const selected = stores[candidateData.storeSelection - 1];
+                    if (selected) {
+                        candidateData.selectedStoreId = selected.tienda.id;
+                        candidateData.selectedStoreName = selected.tienda.nombre;
+                        candidateData.selectedBrandId = selected.tienda.marcaId;
+                        // Also auto-select the first vacancy for simplicity if only one, 
+                        // or move to vacancy selection
+                        newState = CONVERSATION_STATES.SELECCION_VACANTE;
+
+                        // If only one vacancy, skip selection
+                        if (selected.vacantes.length === 1) {
+                            candidateData.selectedVacancy = selected.vacantes[0];
+                            newState = CONVERSATION_STATES.SCREENING;
+                        }
+                    }
                 }
                 break;
 

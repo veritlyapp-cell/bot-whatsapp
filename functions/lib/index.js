@@ -40,7 +40,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.triggerUnfilledCheck = exports.checkUnfilledRQs = void 0;
+exports.onNewApplicationNotifyRecruiters = exports.onRQStatusChange = exports.onRQCreatedNotifySupervisor = exports.onNotificationCreated = exports.triggerUnfilledCheck = exports.checkUnfilledRQs = void 0;
 const functions = __importStar(require("firebase-functions"));
 const admin = __importStar(require("firebase-admin"));
 const params_1 = require("firebase-functions/params");
@@ -308,6 +308,173 @@ exports.triggerUnfilledCheck = functions
     }
     catch (error) {
         res.status(500).json({ error: error.message });
+    }
+});
+/**
+ * Helper to send FCM Push Notification to a specific user
+ */
+async function sendPushNotification(userId, title, body, url = '/') {
+    try {
+        // Get user's push token
+        const tokenDoc = await db.collection('push_tokens').doc(userId).get();
+        if (!tokenDoc.exists) {
+            console.log(`[PUSH] No token found for user: ${userId}`);
+            return;
+        }
+        const { token, active } = tokenDoc.data() || {};
+        if (!token || active === false)
+            return;
+        const message = {
+            notification: {
+                title,
+                body
+            },
+            data: {
+                url,
+                click_action: url
+            },
+            token: token
+        };
+        const response = await admin.messaging().send(message);
+        console.log(`[PUSH] Sent successfully to ${userId}:`, response);
+    }
+    catch (error) {
+        console.error(`[PUSH] Error sending to ${userId}:`, error);
+    }
+}
+/**
+ * Trigger: When a new notification is created in Firestore, send a Push Notification
+ */
+exports.onNotificationCreated = functions.firestore
+    .document('notifications/{notificationId}')
+    .onCreate(async (snapshot) => {
+    const data = snapshot.data();
+    if (!data)
+        return;
+    // Try to find the user by email to get their ID for the token lookup
+    // Use userAssignments collection to find the userId
+    const userSnapshot = await db.collection('userAssignments')
+        .where('email', '==', data.recipientEmail)
+        .limit(1)
+        .get();
+    if (userSnapshot.empty) {
+        console.log(`[PUSH] User not found for email: ${data.recipientEmail}`);
+        return;
+    }
+    const userId = userSnapshot.docs[0].id;
+    const url = data.data?.link || '/';
+    await sendPushNotification(userId, data.title, data.message, url);
+});
+/**
+ * Trigger: Inform Supervisor when a new RQ is created in their store
+ */
+exports.onRQCreatedNotifySupervisor = functions.firestore
+    .document('rqs/{rqId}')
+    .onCreate(async (snapshot) => {
+    const rq = snapshot.data();
+    if (!rq)
+        return;
+    const holdingId = rq.holdingId;
+    const tiendaId = rq.tiendaId;
+    // Find supervisors for this store
+    const supervisorsSnapshot = await db.collection('userAssignments')
+        .where('holdingId', '==', holdingId)
+        .where('role', '==', 'supervisor')
+        .where('active', '==', true)
+        .get();
+    const storeSupervisors = supervisorsSnapshot.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .filter((s) => s.assignedStores?.some((t) => t.tiendaId === tiendaId));
+    for (const supervisor of storeSupervisors) {
+        await sendPushNotification(supervisor.id, '🆕 Nuevo RQ Pendiente', `Se ha creado un nuevo RQ #${rq.rqNumber || ''} para ${rq.posicion} en ${rq.tiendaNombre}. Requiere tu aprobación.`, '/supervisor');
+    }
+});
+/**
+ * Trigger: Notify relevant roles when RQ status changes
+ */
+exports.onRQStatusChange = functions.firestore
+    .document('rqs/{rqId}')
+    .onUpdate(async (change) => {
+    const before = change.before.data();
+    const after = change.after.data();
+    if (!before || !after)
+        return;
+    // 1. Notify Jefe de Marca when Supervisor approves
+    if (before.approvalStatus === 'pending' && after.approvalStatus === 'approved' && !after.finalApproval) {
+        const jefesSnapshot = await db.collection('userAssignments')
+            .where('holdingId', '==', after.holdingId)
+            .where('role', '==', 'jefe_marca')
+            .where('active', '==', true)
+            .get();
+        // Filter for the specific brand
+        const brandJefes = jefesSnapshot.docs
+            .map(d => ({ id: d.id, ...d.data() }))
+            .filter((j) => j.assignedMarca?.marcaId === after.marcaId || j.marcaId === after.marcaId);
+        for (const jefe of brandJefes) {
+            await sendPushNotification(jefe.id, '⚡ RQ Pendiente de Firma', `El RQ #${after.rqNumber} ha sido aprobado por el supervisor y requiere tu validación final.`, '/jefe-marca');
+        }
+    }
+    // 2. Notify Creator and Recruiters when final approval is given
+    if (!before.finalApproval && after.finalApproval) {
+        // Notify Creator (if email exists)
+        if (after.createdByEmail) {
+            const creatorSnapshot = await db.collection('userAssignments')
+                .where('email', '==', after.createdByEmail)
+                .limit(1)
+                .get();
+            if (!creatorSnapshot.empty) {
+                await sendPushNotification(creatorSnapshot.docs[0].id, '🎊 RQ Aprobado Final', `Tu RQ #${after.rqNumber} para ${after.posicion} ha sido aprobado completamente y ya está en reclutamiento.`, '/supervisor');
+            }
+        }
+        // Notify Recruiters
+        const recruitersSnapshot = await db.collection('userAssignments')
+            .where('holdingId', '==', after.holdingId)
+            .where('role', 'in', ['recruiter', 'brand_recruiter'])
+            .where('active', '==', true)
+            .get();
+        const brandRecruiters = recruitersSnapshot.docs
+            .map(d => ({ id: d.id, ...d.data() }))
+            .filter((r) => r.assignedMarcas?.some((m) => m.marcaId === after.marcaId) ||
+            r.marcaId === after.marcaId);
+        for (const recruiter of brandRecruiters) {
+            await sendPushNotification(recruiter.id, '🎯 Nuevo RQ para Reclutar', `Se ha liberado el RQ #${after.rqNumber} (${after.posicion}) para ${after.marcaNombre}.`, '/recruiter');
+        }
+    }
+    // 3. Notify Creator when rejected
+    if (before.approvalStatus !== 'rejected' && after.approvalStatus === 'rejected') {
+        if (after.createdByEmail) {
+            const creatorSnapshot = await db.collection('userAssignments')
+                .where('email', '==', after.createdByEmail)
+                .limit(1)
+                .get();
+            if (!creatorSnapshot.empty) {
+                await sendPushNotification(creatorSnapshot.docs[0].id, '❌ RQ Rechazado', `El RQ #${after.rqNumber} ha sido rechazado. Motivo: ${after.rejectionReason || 'No especificado'}`, '/supervisor');
+            }
+        }
+    }
+});
+/**
+ * Trigger: Notify Recruiters when a new application is received
+ */
+exports.onNewApplicationNotifyRecruiters = functions.firestore
+    .document('applications/{appId}')
+    .onCreate(async (snapshot) => {
+    const app = snapshot.data();
+    if (!app)
+        return;
+    const { holdingId, marcaId, candidateName, jobTitle } = app;
+    // Find recruiters for this brand
+    const recruitersSnapshot = await db.collection('userAssignments')
+        .where('holdingId', '==', holdingId)
+        .where('role', 'in', ['recruiter', 'brand_recruiter'])
+        .where('active', '==', true)
+        .get();
+    const brandRecruiters = recruitersSnapshot.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .filter((r) => r.assignedMarcas?.some((m) => m.marcaId === marcaId) ||
+        r.marcaId === marcaId);
+    for (const recruiter of brandRecruiters) {
+        await sendPushNotification(recruiter.id, '📩 Nueva Postulación', `${candidateName} se ha postulado para ${jobTitle}.`, `/recruiter?candidate=${app.candidateId}`);
     }
 });
 //# sourceMappingURL=index.js.map

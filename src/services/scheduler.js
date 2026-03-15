@@ -16,43 +16,86 @@ class Scheduler {
      * @returns {Array} - Array of available time slots
      */
     /**
-     * Generate available time slots for interviews
+     * Generate available time slots for interviews based on store configuration
+     * @param {string} storeId - Store ID to get availability for
      * @param {Date} startDate - Start date for scheduling
      * @param {number} daysAhead - Number of days to generate slots for
      * @returns {Promise<Array>} - Array of available time slots
      */
-    static async generateTimeSlots(startDate = new Date(), daysAhead = 7) {
+    static async generateTimeSlots(storeId, startDate = new Date(), daysAhead = 7) {
         const slots = [];
         const start = new Date(startDate);
         start.setHours(0, 0, 0, 0);
 
-        // Skip weekends and generate slots from 9 AM to 5 PM
-        const interviewHours = [9, 10, 11, 14, 15, 16, 17]; // Skipping 12-13 for lunch
-
-        for (let day = 1; day <= daysAhead; day++) {
-            const currentDate = new Date(start);
-            currentDate.setDate(start.getDate() + day);
-
-            // Skip Sundays (0 = Sunday)
-            if (currentDate.getDay() === 0) {
-                continue;
+        try {
+            let availability = null;
+            if (storeId) {
+                const storeDoc = await db.collection('tiendas').doc(storeId).get();
+                if (storeDoc.exists) {
+                    availability = storeDoc.data().availability;
+                    Logger.info(`🕒 Using custom availability for store: ${storeId}`);
+                }
             }
 
-            for (const hour of interviewHours) {
-                const slotTime = new Date(currentDate);
-                slotTime.setHours(hour, 0, 0, 0);
+            const DAYS_OF_WEEK = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
 
-                slots.push({
-                    date: slotTime,
-                    display: this.formatSlotDisplay(slotTime)
-                });
+            for (let day = 1; day <= daysAhead; day++) {
+                const currentDate = new Date(start);
+                currentDate.setDate(start.getDate() + day);
+                const dayName = DAYS_OF_WEEK[currentDate.getDay()];
+
+                // Get configuration for this day
+                let dayEnabled = true;
+                let dayRanges = [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '17:00' }]; // Defaults
+                let interval = 30; // 30 mins default
+
+                if (availability) {
+                    interval = availability.slotInterval || 30;
+                    if (availability.daysConfig && availability.daysConfig[dayName]) {
+                        dayEnabled = availability.daysConfig[dayName].enabled;
+                        dayRanges = availability.daysConfig[dayName].ranges || [];
+                    } else if (availability.days) {
+                        // Legacy support
+                        dayEnabled = availability.days.includes(dayName);
+                        dayRanges = dayEnabled ? [{ start: availability.startHour || '09:00', end: availability.endHour || '17:00' }] : [];
+                    }
+                } else if (dayName === 'domingo') {
+                    dayEnabled = false; // Default: Sundays off
+                }
+
+                if (!dayEnabled || dayRanges.length === 0) continue;
+
+                // For each range, generate slots
+                for (const range of dayRanges) {
+                    const [startH, startM] = range.start.split(':').map(Number);
+                    const [endH, endM] = range.end.split(':').map(Number);
+
+                    let currentTime = new Date(currentDate);
+                    currentTime.setHours(startH, startM, 0, 0);
+
+                    const endTime = new Date(currentDate);
+                    endTime.setHours(endH, endM, 0, 0);
+
+                    while (currentTime < endTime) {
+                        slots.push({
+                            date: new Date(currentTime),
+                            display: this.formatSlotDisplay(currentTime)
+                        });
+                        // Move to next slot based on interval
+                        currentTime.setMinutes(currentTime.getMinutes() + interval);
+                    }
+                }
             }
+
+            // Filter by Calendar availability (Mock or Real)
+            const calendarId = 'seleccion@ngr.com.pe';
+            return await CalendarService.filterAvailableSlots(calendarId, slots);
+
+        } catch (error) {
+            Logger.error('❌ Error generating time slots:', error);
+            // Fallback to basic slots if something fails
+            return [];
         }
-
-        // Filter by Calendar availability (Mock or Real)
-        // Using a generic calendar ID (e.g., recruiter's email)
-        const calendarId = 'seleccion@ngr.com.pe';
-        return await CalendarService.filterAvailableSlots(calendarId, slots);
     }
 
     /**
