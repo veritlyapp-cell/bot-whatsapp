@@ -9,5 +9,8 @@
     "firestore": {
         "rules": "lia-frontend/firestore.rules",
         "indexes": "lia-frontend/firestore.indexes.json"
+    },
+    "storage": {
+        "rules": "lia-frontend/storage.rules"
     }
 }
